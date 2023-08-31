@@ -4,4 +4,4 @@ version = "0.1.0"
 dependencies = ["click"]
 
 [project.scripts]
-piu = "piu.main:cli"
+piu = "piu:cli"
