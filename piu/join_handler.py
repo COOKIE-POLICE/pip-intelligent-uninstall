@@ -1,5 +1,5 @@
-def join_handler(iterable, seperator):
+def join_handler(iterable, separator):
     if iterable == []:
         return "<Nothing>"
     else:
-        return seperator.join(iterable)
+        return separator.join(iterable)

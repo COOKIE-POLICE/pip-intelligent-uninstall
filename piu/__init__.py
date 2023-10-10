@@ -5,12 +5,12 @@ from colorama import Fore, Style, deinit, init
 
 from .find_can_and_cannot_uninstall import *
 from .find_dependencies import *
-from .find_requiredby import *
+from .find_required_by import *
 from .join_handler import *
 
 init()
 
-packages_requiredby = find_requiredby()
+packages_required_by = find_required_by()
 dependencies = find_dependencies()
 flat_dependencies = find_flat_dependencies()
 
@@ -25,11 +25,11 @@ def cli():
 def uninstall(package_name):
     if package_name in flat_dependencies:
         click.echo(
-            f"{Fore.RED}You cannot uninstall {package_name} as it is required by {join_handler(packages_requiredby[package_name], ', ')}{Style.RESET_ALL}"
+            f"{Fore.RED}You cannot uninstall {package_name} as it is required by {join_handler(packages_required_by[package_name], ', ')}{Style.RESET_ALL}"
         )
     else:
         can_uninstall, cannot_uninstall = find_can_and_cannot_uninstall(
-            package_name, dependencies, packages_requiredby
+            package_name, dependencies, packages_required_by
         )
         click.echo(
             f"{Fore.RED}You cannot uninstall: {join_handler(cannot_uninstall, ', ')} (Other packages depend on them){Style.RESET_ALL}\n"
